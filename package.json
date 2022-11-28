@@ -1,0 +1,25 @@
+{
+  "name": "pokemon-game",
+  "version": "1.0.0",
+  "description": "Pokemon Game",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "typesctipt index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maxim-berdnikov/pokemon-game.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maxim-berdnikov/pokemon-game/issues"
+  },
+  "homepage": "https://github.com/maxim-berdnikov/pokemon-game#readme",
+  "dependencies": {
+    "typescript": "^4.9.3"
+  }
+}
