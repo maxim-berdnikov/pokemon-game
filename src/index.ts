@@ -1,305 +1,277 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const collisions = [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1025, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1025, 1025, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1025, 0, 1025, 1025, 0,
-    0, 1025, 1025, 0, 0, 1025, 1025, 0, 0, 1025, 1025, 0, 0, 1025, 1025, 0,
-    1025, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    1025, 0, 0, 0, 1025, 1025, 0, 0, 1025, 1025, 0, 0, 1025, 1025, 0, 0, 1025,
-    1025, 0, 0, 0, 1025, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 1025, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 1025, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 1025, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    1025, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    1025, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1025, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1025, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1025, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1025, 0, 1025,
-    1025, 1025, 1025, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1025, 1025, 1025, 1025, 0, 0,
-    1025, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    1025, 0, 1025, 0, 0, 1025, 0, 0, 0, 0, 0, 0, 0, 0, 1025, 0, 0, 0, 0, 1025,
-    0, 1025, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 1025, 0, 1025, 0, 0, 1025, 0, 0, 0, 0, 0, 0, 0, 0, 1025, 0, 0, 0, 0,
-    1025, 0, 1025, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 1025, 0, 1025, 0, 0, 1025, 0, 0, 0, 0, 0, 0, 0, 0, 1025, 0, 0, 0,
-    0, 1025, 0, 1025, 1025, 1025, 1025, 1025, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 1025, 0, 1025, 1025, 1025, 1025, 0, 0, 0, 0, 0, 0,
-    0, 0, 1025, 1025, 0, 0, 1025, 1025, 0, 0, 0, 0, 0, 0, 1025, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1025, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1025, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1025, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1025, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 1025, 0, 1025, 1025, 1025, 1025, 1025, 1025, 1025,
-    1025, 1025, 1025, 1025, 1025, 1025, 0, 0, 0, 0, 0, 0, 1025, 1025, 1025,
-    1025, 1025, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1025,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1025, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1025, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1025, 1025, 1025, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1025, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1025, 1025, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1025, 0, 0, 1025, 1025,
-    1025, 0, 0, 0, 0, 0, 0, 0, 0, 1025, 1025, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1025, 1025, 0, 0,
-    0, 1025, 1025, 1025, 0, 1025, 1025, 1025, 1025, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 1025, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0,
-  ];
+import { collisions } from "./collisions";
+import { Sprite, Boundary } from "./classes";
 
-  const canvas = document.querySelector("canvas");
-  const c = canvas.getContext("2d");
+import map from "../assets/img/map.png";
+import playerDown from "../assets/img/playerDown.png";
+import foregroundObjects from "../assets/img/foregroundObjects.png";
 
-  canvas.width = 1024;
-  canvas.height = 576;
-  console.log(c);
+const canvas = <HTMLCanvasElement>document.querySelector("canvas");
 
-  c.fillStyle = "#ffffff";
-  c.fillRect(0, 0, canvas.width, canvas.height);
+const c = <CanvasRenderingContext2D>canvas.getContext("2d");
 
-  const collisionsMap: number[][] = [];
+canvas.width = 1024;
+canvas.height = 576;
+console.log(c);
 
-  for (let i = 0; i < collisions.length; i += 70) {
-    collisionsMap.push(collisions.slice(i, 70 + i));
-  }
+c.fillStyle = "#ffffff";
+c.fillRect(0, 0, canvas.width, canvas.height);
 
-  const offset = { x: -832, y: -570 };
+const collisionsMap: number[][] = [];
 
-  type BoundaryProps = {
-    position: { x: number; y: number };
-  };
+for (let i = 0; i < collisions.length; i += 70) {
+	collisionsMap.push(collisions.slice(i, 70 + i));
+}
 
-  class Boundary {
-    position;
-    static width = 48;
-    static height = 48;
-    width;
-    height;
+const offset = {
+	x: -832,
+	y: -620,
+};
 
-    constructor({ position }: BoundaryProps) {
-      this.position = position;
-      this.width = 48;
-      this.height = 48;
-    }
+const boundaries: Boundary[] = [];
 
-    draw() {
-      c.fillStyle = "red";
-      c.fillRect(this.position.x, this.position.y, this.width, this.height);
-    }
-  }
+collisionsMap.forEach((row, rowIndex) => {
+	row.forEach((symbol, symbolIndex) => {
+		if (symbol === 1025) {
+			boundaries.push(
+				new Boundary({
+					position: {
+						x: symbolIndex * Boundary.width + offset.x,
+						y: rowIndex * Boundary.height + offset.y,
+					},
+				})
+			);
+		}
+	});
+});
 
-  const boundaries: Boundary[] = [];
+const image = new Image();
+image.src = map;
 
-  collisionsMap.forEach((row, rowIndex) => {
-    row.forEach((symbol, symbolIndex) => {
-      if (symbol === 1025) {
-        boundaries.push(
-          new Boundary({
-            position: {
-              x: symbolIndex * Boundary.width + offset.x,
-              y: rowIndex * Boundary.height + offset.y,
-            },
-          })
-        );
-      }
-    });
-  });
+const foregroundImage = new Image();
+foregroundImage.src = foregroundObjects;
 
-  const image = new Image();
-  image.src = "../assets/img/map.png";
+const playerImage = new Image();
+playerImage.src = playerDown;
 
-  const playerImage = new Image();
-  playerImage.src = "../assets/img/playerDown.png";
+let lastKey = "";
 
-  let lastKey = "";
+const player = new Sprite({
+	position: {
+		x: canvas.width / 2 - 192 / 4 / 2, //playerImage.width
+		y: canvas.height / 2 - 68 / 2, //playerImage.height
+	},
+	image: playerImage,
+	frames: {
+		max: 4,
+	},
+});
 
-  type SpriteProps = {
-    position: { x: number; y: number };
-    velocity?: number;
-    image: HTMLImageElement;
-  };
+const background = new Sprite({
+	position: {
+		x: offset.x,
+		y: offset.y,
+	},
+	image: image,
+});
 
-  class Sprite {
-    position;
-    image;
-    constructor({ position, velocity, image }: SpriteProps) {
-      this.position = position;
-      this.image = image;
-    }
+const foreground = new Sprite({
+	position: {
+		x: offset.x - 3,
+		y: offset.y,
+	},
+	image: foregroundImage,
+});
 
-    draw() {
-      c.drawImage(this.image, this.position.x, this.position.y);
-    }
-  }
+const keys = {
+	w: {
+		pressed: false,
+	},
+	a: {
+		pressed: false,
+	},
+	s: {
+		pressed: false,
+	},
+	d: {
+		pressed: false,
+	},
+};
 
-  const background = new Sprite({
-    position: {
-      x: offset.x,
-      y: offset.y,
-    },
-    image: image,
-  });
+const movables = [background, ...boundaries, foreground];
 
-  const keys = {
-    w: {
-      pressed: false,
-    },
-    a: {
-      pressed: false,
-    },
-    s: {
-      pressed: false,
-    },
-    d: {
-      pressed: false,
-    },
-  };
+const rectangularCollision = ({
+	rectangleOne,
+	rectangleTwo,
+}: {
+	rectangleOne: Sprite;
+	rectangleTwo: Boundary;
+}) => {
+	return (
+		rectangleOne.position.x + rectangleOne.width >=
+			rectangleTwo.position.x &&
+		rectangleOne.position.x <=
+			rectangleTwo.position.x + rectangleTwo.width &&
+		rectangleOne.position.y <=
+			rectangleTwo.position.y + rectangleTwo.height &&
+		rectangleOne.position.y + rectangleOne.height >= rectangleTwo.position.y
+	);
+};
 
-  const animate = () => {
-    window.requestAnimationFrame(animate);
-    background.draw();
-    boundaries.forEach((boundary) => {
-      console.log({ boundary });
+const animate = () => {
+	window.requestAnimationFrame(animate);
+	background.draw(c);
+	boundaries.forEach((boundary) => {
+		boundary.draw(c);
+	});
 
-      boundary.draw();
-    });
-    c.drawImage(
-      playerImage,
-      0,
-      0,
-      playerImage.width / 4,
-      playerImage.height,
-      canvas.width / 2 - playerImage.width / 4 / 2,
-      canvas.height / 2 - playerImage.height / 2,
-      playerImage.width / 4,
-      playerImage.height
-    );
+	player.draw(c);
+	foreground.draw(c);
 
-    if (keys.w.pressed && lastKey === "w") {
-      background.position.y += 3;
-    } else if (keys.a.pressed && lastKey === "a") {
-      background.position.x += 3;
-    } else if (keys.s.pressed && lastKey === "s") {
-      background.position.y -= 3;
-    } else if (keys.d.pressed && lastKey === "d") {
-      background.position.x -= 3;
-    }
-  };
+	let moving = true;
 
-  animate();
+	if (keys.w.pressed && lastKey === "w") {
+		for (let i = 0; i < boundaries.length; i += 1) {
+			const boundary = boundaries[i];
+			if (
+				rectangularCollision({
+					rectangleOne: player,
+					rectangleTwo: {
+						// ...boundary,
+						width: boundary.width,
+						height: boundary.height,
+						draw: boundary.draw,
+						position: {
+							x: boundary.position.x,
+							y: boundary.position.y + 3,
+						},
+					},
+				})
+			) {
+				console.log("colliding");
+				moving = false;
+				break;
+			}
+		}
+		if (moving) {
+			movables.forEach((movable) => (movable.position.y += 3));
+		}
+	} else if (keys.a.pressed && lastKey === "a") {
+		for (let i = 0; i < boundaries.length; i += 1) {
+			const boundary = boundaries[i];
+			if (
+				rectangularCollision({
+					rectangleOne: player,
+					rectangleTwo: {
+						// ...boundary,
+						width: boundary.width,
+						height: boundary.height,
+						draw: boundary.draw,
+						position: {
+							x: boundary.position.x + 3,
+							y: boundary.position.y,
+						},
+					},
+				})
+			) {
+				console.log("colliding");
+				moving = false;
+				break;
+			}
+		}
+		if (moving) {
+			movables.forEach((movable) => (movable.position.x += 3));
+		}
+	} else if (keys.s.pressed && lastKey === "s") {
+		for (let i = 0; i < boundaries.length; i += 1) {
+			const boundary = boundaries[i];
+			if (
+				rectangularCollision({
+					rectangleOne: player,
+					rectangleTwo: {
+						// ...boundary,
+						width: boundary.width,
+						height: boundary.height,
+						draw: boundary.draw,
+						position: {
+							x: boundary.position.x,
+							y: boundary.position.y - 3,
+						},
+					},
+				})
+			) {
+				console.log("colliding");
+				moving = false;
+				break;
+			}
+		}
+		if (moving) {
+			movables.forEach((movable) => (movable.position.y -= 3));
+		}
+	} else if (keys.d.pressed && lastKey === "d") {
+		for (let i = 0; i < boundaries.length; i += 1) {
+			const boundary = boundaries[i];
+			if (
+				rectangularCollision({
+					rectangleOne: player,
+					rectangleTwo: {
+						// ...boundary,
+						width: boundary.width,
+						height: boundary.height,
+						draw: boundary.draw,
+						position: {
+							x: boundary.position.x - 3,
+							y: boundary.position.y,
+						},
+					},
+				})
+			) {
+				console.log("colliding");
+				moving = false;
+				break;
+			}
+		}
+		if (moving) {
+			movables.forEach((movable) => (movable.position.x -= 3));
+		}
+	}
+};
 
-  window.addEventListener("keydown", (event) => {
-    switch (event.key) {
-      case "w":
-        keys[event.key].pressed = true;
-        lastKey = event.key;
-        break;
-      case "a":
-        keys[event.key].pressed = true;
-        lastKey = event.key;
-        break;
-      case "s":
-        keys[event.key].pressed = true;
-        lastKey = event.key;
-        break;
-      case "d":
-        keys[event.key].pressed = true;
-        lastKey = event.key;
-        break;
-    }
-  });
+animate();
 
-  window.addEventListener("keyup", (event) => {
-    switch (event.key) {
-      case "w":
-        keys[event.key].pressed = false;
-        console.log("w");
-        break;
-      case "a":
-        keys[event.key].pressed = false;
-        console.log("a");
-        break;
-      case "s":
-        keys[event.key].pressed = false;
-        console.log("s");
-        break;
-      case "d":
-        keys[event.key].pressed = false;
-        console.log("d");
-        break;
-    }
-  });
+window.addEventListener("keydown", (event) => {
+	switch (event.key) {
+		case "w":
+			keys[event.key].pressed = true;
+			lastKey = event.key;
+			break;
+		case "a":
+			keys[event.key].pressed = true;
+			lastKey = event.key;
+			break;
+		case "s":
+			keys[event.key].pressed = true;
+			lastKey = event.key;
+			break;
+		case "d":
+			keys[event.key].pressed = true;
+			lastKey = event.key;
+			break;
+	}
+});
+
+window.addEventListener("keyup", (event) => {
+	switch (event.key) {
+		case "w":
+			keys[event.key].pressed = false;
+			break;
+		case "a":
+			keys[event.key].pressed = false;
+			break;
+		case "s":
+			keys[event.key].pressed = false;
+			break;
+		case "d":
+			keys[event.key].pressed = false;
+			break;
+	}
 });
