@@ -1,12 +1,4 @@
-type SpriteProps = {
-	position: {
-		x: number;
-		y: number;
-	};
-	velocity?: number;
-	image: HTMLImageElement;
-	frames?: { max: number };
-};
+import { BoundaryProps, SpriteProps } from "./types";
 
 export class Sprite {
 	position;
@@ -49,13 +41,6 @@ export class Sprite {
 		);
 	}
 }
-
-type BoundaryProps = {
-	position: {
-		x: number;
-		y: number;
-	};
-};
 
 export class Boundary {
 	position;
